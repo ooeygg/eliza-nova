@@ -85,10 +85,10 @@ export default function Chat() {
                                 }`}
                             >
                                 <div
-                                    className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                                    className={`max-w-[80%] message-bubble rounded-2xl px-6 py-4 ${
                                         message.user === "user"
-                                            ? "bg-primary text-primary-foreground"
-                                            : "bg-muted"
+                                            ? "bg-primary/10 text-primary neon-text"
+                                            : "bg-muted/50 text-foreground"
                                     }`}
                                 >
                                     {message.text}
@@ -111,14 +111,15 @@ export default function Chat() {
                             </div>
                         ))
                     ) : (
-                        <div className="text-center text-muted-foreground">
-                            No messages yet. Start a conversation!
+                        <div className="text-center text-muted-foreground neon-text opacity-50 mt-20">
+                            <div className="text-4xl mb-4">💭</div>
+                            <div className="text-xl">Start a conversation...</div>
                         </div>
                     )}
                 </div>
             </div>
 
-            <div className="border-t p-4 bg-background">
+            <div className="border-t border-border/50 backdrop-blur-xl bg-background/80 p-6">
                 <div className="max-w-3xl mx-auto">
                     <form onSubmit={handleSubmit} className="flex gap-2">
                         <input

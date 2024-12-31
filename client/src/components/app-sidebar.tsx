@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { MessageSquare, User2 } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 import {
@@ -18,12 +18,14 @@ const items = [
     {
         title: "Chat",
         url: "chat",
-        icon: Inbox,
+        icon: MessageSquare,
+        description: "Start a conversation",
     },
     {
-        title: "Character Overview",
+        title: "Character",
         url: "character",
-        icon: Calendar,
+        icon: User2,
+        description: "View character details",
     },
 ];
 
@@ -34,7 +36,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel>Nova</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
