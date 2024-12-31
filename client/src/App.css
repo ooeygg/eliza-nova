@@ -41,7 +41,7 @@
 }
 
 @keyframes pulse {
-    0%, 100% {
+    from, to {
         opacity: 0.4;
         transform: scale(0.8);
     }
@@ -81,4 +81,69 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+}
+
+.cursor-trail {
+    width: 24px;
+    height: 24px;
+    border: 2px solid hsl(var(--primary));
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.5;
+    transition: 
+        width 0.3s ease-out,
+        height 0.3s ease-out,
+        border 0.3s ease-out,
+        opacity 0.3s ease-out;
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(
+        circle,
+        hsla(var(--primary), 0.15) 0%,
+        hsla(var(--primary), 0) 70%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.5;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes trailFade {
+    from {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+}
+
+.trail-particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: hsl(var(--primary));
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9996;
+    animation: trailFade 0.5s ease-out forwards;
 }

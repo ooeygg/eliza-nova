@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CursorEffect } from '@/components/CursorEffect';
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { ImageIcon } from "lucide-react";
@@ -72,6 +73,7 @@ export default function Chat() {
 
     return (
         <div className="flex flex-col h-screen max-h-screen w-full">
+            <CursorEffect />
             <div className="flex-1 min-h-0 overflow-y-auto p-4">
                 <div className="max-w-3xl mx-auto space-y-4">
                     {messages.length > 0 ? (
