@@ -1,6 +1,6 @@
 // In your router configuration file (e.g., App.jsx or router.jsx)
 import { createBrowserRouter } from "react-router-dom";
-import ComingSoon from "./Comingsoon";
+import ComingSoon from "./components/ui/ComingSoon";
 import Landing from "./Landing";
 import Agent from "./Agent"; // We'll create this component
 import Layout from "./Layout";
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "", // This matches /:agentId exactly
-                element: <Agent />,
+                element: <ComingSoon />,
             },
             {
                 path: "chat", // This matches /:agentId/chat
