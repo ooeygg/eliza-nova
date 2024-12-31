@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "", // This matches /:agentId exactly
-                element: <ComingSoon />,
+                element: <Chat />,
             },
             {
                 path: "chat", // This matches /:agentId/chat
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "character", // This matches /:agentId/chat
-                element: <Character />,
+                element: <ComingSoon />,
             },
         ],
     },

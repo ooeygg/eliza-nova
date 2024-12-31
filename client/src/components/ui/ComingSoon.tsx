@@ -60,7 +60,7 @@ export const ComingSoon = () => {
   }, [dimensions]);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800">
+    <div className="relative h-screen w-full overflow-hidden bg-black">
       {/* Particles */}
       {particles.map((particle, index) => (
         <div

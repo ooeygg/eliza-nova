@@ -5,8 +5,8 @@ import Agents from "./Agents";
 
 const Landing = () => {
   const [addresses] = useState({
-    CA: 'AxDKAyDsC7p8C5MeDFX6FKV2MPCSGwzkRfGY2qZZpump',
-    SOL: 'EznohfySPHZmXX5rYZ4MDFSVNXrZsgIz4vtgn17wJ2Z'
+    CA: 'TBA',
+    SOL: 'TBA'
   });
 
   const [isGlowing, setIsGlowing] = useState(false);
