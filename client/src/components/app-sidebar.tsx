@@ -22,10 +22,10 @@ const items = [
         description: "Start a conversation",
     },
     {
-        title: "Character",
-        url: "character",
+        title: "Agents",
+        url: "agents",
         icon: User2,
-        description: "View character details",
+        description: "View agents details",
     },
 ];
 
@@ -36,7 +36,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Nova</SidebarGroupLabel>
+                    <SidebarGroupLabel>Nova Dova</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
