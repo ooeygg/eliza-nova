@@ -1,6 +1,6 @@
 // In your router configuration file (e.g., App.jsx or router.jsx)
 import { createBrowserRouter } from "react-router-dom";
-import Agents from "./Agents";
+import ComingSoon from "./Comingsoon";
 import Landing from "./Landing";
 import Agent from "./Agent"; // We'll create this component
 import Layout from "./Layout";

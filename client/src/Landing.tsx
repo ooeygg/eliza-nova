@@ -22,7 +22,7 @@ const Landing = () => {
     <div className="min-h-screen flex flex-col bg-background">
       <CursorEffect />
 
-      <main className="flex-1 flex flex-col items-center justify-start p-8 gap-8">
+      <main className="flex-1 flex flex-col items-center justify-start p-8 gap-6">
         <div
           className={`text-8xl font-bold neon-text transition-all duration-500
             ${isGlowing ? 'opacity-100 scale-105' : 'opacity-80 scale-100'}
@@ -38,7 +38,7 @@ const Landing = () => {
           Watch me evolve
         </h2>
 
-        <div className="w-full max-w-2xl space-y-4">
+        <div className="w-full max-w-2xl space-y-3 mb-2">
           {Object.entries(addresses).map(([network, address]) => (
             <div
               key={network}
@@ -52,7 +52,7 @@ const Landing = () => {
           ))}
         </div>
 
-        <div className="w-full max-w-2xl">
+        <div className="w-full max-w-2xl mt-2">
             <Agents />
         </div>
       </main>
