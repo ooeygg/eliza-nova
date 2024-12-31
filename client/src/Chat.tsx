@@ -75,7 +75,8 @@ export default function Chat() {
             <div className="flex-1 min-h-0 overflow-y-auto p-4">
                 <div className="max-w-3xl mx-auto space-y-4">
                     {messages.length > 0 ? (
-                        messages.map((message, index) => (
+                        <>
+                            {messages.map((message, index) => (
                             <div
                                 key={index}
                                 className={`text-left flex ${
@@ -109,7 +110,23 @@ export default function Chat() {
                                     ))}
                                  </div>
                             </div>
-                        ))
+                            ))}
+                            
+                            {mutation.isPending && (
+                                <div className="text-left flex justify-start animate-in fade-in slide-in-from-bottom-4">
+                                    <div className="max-w-[80%] message-bubble rounded-2xl px-6 py-4 bg-muted/50 text-foreground">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex gap-2">
+                                                <span className="animate-pulse-fast h-2 w-2 rounded-full bg-primary/60" />
+                                                <span className="animate-pulse-med h-2 w-2 rounded-full bg-primary/60" />
+                                                <span className="animate-pulse-slow h-2 w-2 rounded-full bg-primary/60" />
+                                            </div>
+                                            <span className="text-sm text-muted-foreground">thinking...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     ) : (
                         <div className="text-center text-muted-foreground neon-text opacity-50 mt-20">
                             <div className="text-4xl mb-4">💭</div>
