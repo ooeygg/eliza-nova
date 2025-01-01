@@ -19,7 +19,8 @@ export const Footer = () => {
         <FooterLink href="/discord">Discord</FooterLink>
         <FooterLink href="/github">Github</FooterLink>
         <FooterLink href="/dexscreener">Dexscreener</FooterLink>
-        <FooterLink href="/disclaimer">Disclaimer</FooterLink>
+        {/* <FooterLink href="/disclaimer">Disclaimer</FooterLink> */}
+        <FooterLink href="/roadmap">Road Map</FooterLink>
         <FooterLink href="/about">About</FooterLink>
       </nav>
     </footer>
