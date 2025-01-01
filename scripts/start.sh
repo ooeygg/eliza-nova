@@ -42,7 +42,7 @@ fi
 
 # Start project
 echo "\033[1mStarting project...\033[0m"
-if ! pnpm start; then
+if ! pnpm start --characters="characters/nova.json"; then
     echo "\033[1;31mFailed to start project.\033[0m"
     exit 1
 fi

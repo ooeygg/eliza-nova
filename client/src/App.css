@@ -41,7 +41,8 @@
 }
 
 @keyframes pulse {
-    from, to {
+    from,
+    to {
         opacity: 0.4;
         transform: scale(0.8);
     }
@@ -95,15 +96,15 @@
 }
 
 .cursor-trail {
-    width: 24px;
-    height: 24px;
+    width: 44px;
+    height: 44px;
     border: 2px solid hsl(var(--primary));
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9998;
     opacity: 0.5;
-    transition: 
+    transition:
         width 0.3s ease-out,
         height 0.3s ease-out,
         border 0.3s ease-out,
