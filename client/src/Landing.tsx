@@ -31,7 +31,7 @@ const Landing = () => {
             after:bg-cyan-400/20 after:blur-xl after:rounded-full
             relative`}
         >
-          NOVA
+          NOVA DOVA DAO
         </div>
 
         <h2 className="text-2xl text-primary/80">
