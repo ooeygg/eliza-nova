@@ -5,7 +5,7 @@ import Agents from "./Agents";
 
 const Landing = () => {
   const [addresses] = useState({
-    CA: 'TBA',
+    CA: '8HjiRvPNwFT9jpzAAsYF4rE9y576CKdTkQZXaxibpump',
     SOL: 'TBA'
   });
 
