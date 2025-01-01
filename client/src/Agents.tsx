@@ -30,7 +30,7 @@ function Agents() {
                     {agents?.map((agent) => (
                         <Button
                             key={agent.id}
-                            className="w-full text-lg py-4 bg-card/30 backdrop-blur-sm border border-primary/20 hover:border-primary/40 transition-all duration-300 text-primary/80 hover:text-primary"
+                            className="w-full text-lg py-4 bg-card/30 backdrop-blur-sm border border-primary/20 hover:border-primary/40 transition-all duration-300 text-primary/80 hover:text-black hover:opacity-100 hover:scale-105"
                             onClick={() => {
                                 navigate(`/${agent.id}`);
                             }}
