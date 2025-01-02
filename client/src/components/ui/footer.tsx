@@ -17,7 +17,7 @@ export const Footer = () => {
         <FooterLink href="https://x.com/nova_dova_dao">X</FooterLink>
         {/* <FooterLink href="/telegram">Telegram</FooterLink> */}
         <FooterLink href="https://discord.gg/p5XDxgba6n">Discord</FooterLink>
-        <FooterLink href="/github">Github</FooterLink>
+        {/* <FooterLink href="/github">Github</FooterLink> */}
         {/* <FooterLink href="/dexscreener">Dexscreener</FooterLink> */}
         <FooterLink href="https://pump.fun/coin/8HjiRvPNwFT9jpzAAsYF4rE9y576CKdTkQZXaxibpump">Pump.fun</FooterLink>
         {/* <FooterLink href="/disclaimer">Disclaimer</FooterLink> */}

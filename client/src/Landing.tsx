@@ -46,7 +46,16 @@ const Landing = () => {
             >
               <span className="text-primary min-w-12">{network}:</span>
               <code className="font-mono text-muted-foreground flex-1 overflow-x-auto">
-                {address}
+                {network === 'CA' ? (
+                  <a 
+                    href={`https://pump.fun/coin/${address}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    {address}
+                  </a>
+                ) : address}
               </code>
             </div>
           ))}
