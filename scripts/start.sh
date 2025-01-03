@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh start.sh
 
 # Node.js version check
 REQUIRED_NODE_VERSION=22
