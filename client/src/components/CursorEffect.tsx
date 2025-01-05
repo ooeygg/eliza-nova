@@ -38,7 +38,6 @@ export function CursorEffect() {
 
         cursor.className = 'cursor-dot';
         trail.className = 'cursor-trail';
-        glow.className = 'cursor-glow';
 
         document.body.appendChild(cursor);
         document.body.appendChild(trail);

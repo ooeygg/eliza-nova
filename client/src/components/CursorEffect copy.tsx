@@ -13,7 +13,6 @@ export function CursorEffect() {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
         const glow = document.createElement('div');
-        glow.className = 'cursor-glow';
 
         document.body.appendChild(cursor);
         document.body.appendChild(trail);

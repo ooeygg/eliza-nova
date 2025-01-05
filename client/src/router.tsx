@@ -25,7 +25,7 @@ export const router = createBrowserRouter([
                 element: <Chat />,
             },
             {
-                path: "character", // This matches /:agentId/chat
+                path: "agents", // This matches /:agentId/chat
                 element: <ComingSoon />,
             },
         ],

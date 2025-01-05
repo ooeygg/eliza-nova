@@ -22,7 +22,7 @@ const items = [
         description: "Start a conversation",
     },
     {
-        title: "Agents",
+        title: "Agent Builder",
         url: "agents",
         icon: User2,
         description: "View agents details",
