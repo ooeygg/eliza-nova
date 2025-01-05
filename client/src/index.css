@@ -85,15 +85,13 @@
 }
 
 .neon-text {
-    text-shadow:
-        0 0 10px hsl(140 100% 50% / 0.5),
-        0 0 20px hsl(140 100% 50% / 0.3);
+    text-shadow: 0 0 10px hsl(140 100% 50% / 0.5),
+                 0 0 20px hsl(140 100% 50% / 0.3);
 }
 
 .neon-border {
-    box-shadow:
-        0 0 10px hsl(140 100% 50% / 0.5),
-        0 0 20px hsl(140 100% 50% / 0.3);
+    box-shadow: 0 0 10px hsl(140 100% 50% / 0.5),
+                0 0 20px hsl(140 100% 50% / 0.3);
 }
 
 .message-bubble {
@@ -103,9 +101,8 @@
 }
 
 .message-bubble:hover {
-    box-shadow:
-        0 0 10px hsl(140 100% 50% / 0.5),
-        0 0 20px hsl(140 100% 50% / 0.3);
+    box-shadow: 0 0 10px hsl(140 100% 50% / 0.5),
+                0 0 20px hsl(140 100% 50% / 0.3);
 }
 
 @layer base {

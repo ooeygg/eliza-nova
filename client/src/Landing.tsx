@@ -48,7 +48,7 @@ const Landing = () => {
               <code className="font-mono text-muted-foreground flex-1 overflow-x-auto">
                 {network === 'CA' ? (
                   <a
-                    href="https://dexscreener.com/solana/3i8wmd25pdifbikjmklelvenjjhim3mfluabcmeofwc2"
+                    href={`https://pump.fun/coin/${address}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-primary transition-colors"

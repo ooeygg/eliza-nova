@@ -20,6 +20,22 @@
     transition: all 0.2s ease;
 }
 
+.cursor-glow {
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(
+        circle,
+        rgba(57, 255, 20, 0.15) 0%,
+        rgba(57, 255, 20, 0.1) 40%,
+        rgba(57, 255, 20, 0) 70%
+    );
+    position: fixed;
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+}
+
 .trail-particle {
     position: fixed;
     width: 8px;
