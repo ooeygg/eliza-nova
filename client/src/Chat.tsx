@@ -1,11 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import type { TextResponse } from "@/api";
-import { useSendMessageMutation } from "@/api";
-import { ImageIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { CursorEffect } from '@/components/CursorEffect';
+import { useMutation } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import { ImageIcon } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import "./App.css";
+import path from "path";
+
+type TextResponse = {
+    text: string;
+    user: string;
+    attachments?: { url: string; contentType: string; title: string }[];
+};
 
 export default function Chat() {
     const { agentId } = useParams();
@@ -13,20 +20,33 @@ export default function Chat() {
     const [messages, setMessages] = useState<TextResponse[]>([]);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
-    const { mutate: sendMessage, isPending } = useSendMessageMutation({ setMessages, setSelectedFile });
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    };
+    const mutation = useMutation({
+        mutationFn: async (text: string) => {
+            const formData = new FormData();
+            formData.append("text", text);
+            formData.append("userId", "user");
+            formData.append("roomId", `default-room-${agentId}`);
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages]);
+            if (selectedFile) {
+                formData.append("file", selectedFile);
+            }
+
+            const res = await fetch(`/api/${agentId}/message`, {
+                method: "POST",
+                body: formData,
+            });
+            return res.json() as Promise<TextResponse[]>;
+        },
+        onSuccess: (data) => {
+            setMessages((prev) => [...prev, ...data]);
+            setSelectedFile(null);
+        },
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if ((!input.trim() && !selectedFile) || !agentId) return;
+        if (!input.trim() && !selectedFile) return;
 
         // Add user message immediately to state
         const userMessage: TextResponse = {
@@ -36,7 +56,7 @@ export default function Chat() {
         };
         setMessages((prev) => [...prev, userMessage]);
 
-        sendMessage({ text: input, agentId, selectedFile });
+        mutation.mutate(input);
         setInput("");
     };
 
@@ -53,10 +73,12 @@ export default function Chat() {
 
     return (
         <div className="flex flex-col h-screen max-h-screen w-full">
+            <CursorEffect />
             <div className="flex-1 min-h-0 overflow-y-auto p-4">
                 <div className="max-w-3xl mx-auto space-y-4">
                     {messages.length > 0 ? (
-                        messages.map((message, index) => (
+                        <>
+                            {messages.map((message, index) => (
                             <div
                                 key={index}
                                 className={`text-left flex ${
@@ -65,11 +87,11 @@ export default function Chat() {
                                         : "justify-start"
                                 }`}
                             >
-                                <pre
-                                    className={`max-w-[80%] rounded-lg px-4 py-2 whitespace-pre-wrap ${
+                                <div
+                                    className={`max-w-[80%] message-bubble rounded-2xl px-6 py-4 ${
                                         message.user === "user"
-                                            ? "bg-primary text-primary-foreground"
-                                            : "bg-muted"
+                                            ? "bg-primary/10 text-primary neon-text"
+                                            : "bg-muted/50 text-foreground"
                                     }`}
                                 >
                                     {message.text}
@@ -88,19 +110,35 @@ export default function Chat() {
                                             />
                                         )
                                     ))}
-                                 </pre>
+                                 </div>
                             </div>
-                        ))
+                            ))}
+                            
+                            {mutation.isPending && (
+                                <div className="text-left flex justify-start animate-in fade-in slide-in-from-bottom-4">
+                                    <div className="max-w-[80%] message-bubble rounded-2xl px-6 py-4 bg-muted/50 text-foreground">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex gap-2">
+                                                <span className="animate-pulse-fast h-2 w-2 rounded-full bg-primary/60" />
+                                                <span className="animate-pulse-med h-2 w-2 rounded-full bg-primary/60" />
+                                                <span className="animate-pulse-slow h-2 w-2 rounded-full bg-primary/60" />
+                                            </div>
+                                            <span className="text-sm text-muted-foreground">thinking...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </>
                     ) : (
-                        <div className="text-center text-muted-foreground">
-                            No messages yet. Start a conversation!
+                        <div className="text-center text-muted-foreground neon-text opacity-50 mt-20">
+                            <div className="text-4xl mb-4">💭</div>
+                            <div className="text-xl">Start a conversation...</div>
                         </div>
                     )}
-                    <div ref={messagesEndRef} />
                 </div>
             </div>
 
-            <div className="border-t p-4 bg-background">
+            <div className="border-t border-border/50 backdrop-blur-xl bg-background/80 p-6">
                 <div className="max-w-3xl mx-auto">
                     <form onSubmit={handleSubmit} className="flex gap-2">
                         <input
@@ -115,19 +153,19 @@ export default function Chat() {
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Type a message..."
                             className="flex-1"
-                            disabled={isPending}
+                            disabled={mutation.isPending}
                         />
                         <Button
                             type="button"
                             variant="outline"
                             size="icon"
                             onClick={handleFileSelect}
-                            disabled={isPending}
+                            disabled={mutation.isPending}
                         >
                             <ImageIcon className="h-4 w-4" />
                         </Button>
-                        <Button type="submit" disabled={isPending}>
-                            {isPending ? "..." : "Send"}
+                        <Button type="submit" disabled={mutation.isPending}>
+                            {mutation.isPending ? "..." : "Send"}
                         </Button>
                     </form>
                     {selectedFile && (

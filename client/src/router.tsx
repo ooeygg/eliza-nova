@@ -1,6 +1,7 @@
 // In your router configuration file (e.g., App.jsx or router.jsx)
 import { createBrowserRouter } from "react-router-dom";
-import Agents from "./Agents";
+import ComingSoon from "./components/ui/ComingSoon";
+import Landing from "./Landing";
 import Agent from "./Agent"; // We'll create this component
 import Layout from "./Layout";
 import Chat from "./Chat";
@@ -9,7 +10,7 @@ import Character from "./Character";
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Agents />,
+        element: <Landing />,
     },
     {
         path: "/:agentId",
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: "", // This matches /:agentId exactly
-                element: <Agent />,
+                element: <Chat />,
             },
             {
                 path: "chat", // This matches /:agentId/chat
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "character", // This matches /:agentId/chat
-                element: <Character />,
+                element: <ComingSoon />,
             },
         ],
     },

@@ -1,0 +1,59 @@
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+}
+
+.cursor-trail {
+    width: 44px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.2s ease;
+}
+
+.trail-particle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: rgba(105, 225, 161, 0.879);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9996;
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+.cursor-click {
+    animation: cursorClick 0.5s ease forwards;
+}
+
+@keyframes cursorClick {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
