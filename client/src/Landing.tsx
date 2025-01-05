@@ -55,6 +55,15 @@ const Landing = () => {
                   >
                     {address}
                   </a>
+                ) : network === 'Exchange' ? (
+                  <a
+                    href="https://raydium.io/swap/?inputMint=8HjiRvPNwFT9jpzAAsYF4rE9y576CKdTkQZXaxibpump&outputMint=sol"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-primary transition-colors"
+                  >
+                    {address}
+                  </a>
                 ) : address}
               </code>
             </div>
