@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+    app_staging_eliza:
+        build:
+            context: ./eliza-nova
+            dockerfile: Dockerfile
+        container_name: eliza_staging
+        restart: always
+        env_file:
+            - secrets/.env
+        environment:
+            - NODE_ENV=staging
+        volumes:
+            - ./eliza-nova:/app
+            - staging_eliza_data:/app/data
+            - node_modules:/app/node_modules
+        ports:
+            - "3001:3000"
+        networks:
+            - staging_eliza_network
+        depends_on:
+            - redis_staging_eliza
+
+    redis_staging_eliza:
+        image: redis:alpine
+        container_name: redis_staging_eliza
+        restart: always
+        volumes:
+            - redis_data:/data
+        networks:
+            - staging_eliza_network
+
+    nginx_staging_eliza:
+        image: nginx:alpine
+        container_name: nginx_staging_eliza
+        ports:
+            - "8443:443"
+            - "8080:80"
+        volumes:
+            - ./nginx:/etc/nginx/conf.d
+            - /etc/letsencrypt:/etc/letsencrypt:ro
+            - ./nginx/.htpasswd:/etc/nginx/.htpasswd:ro
+        depends_on:
+            - app_staging_eliza
+        networks:
+            - staging_eliza_network
+        restart: always
+
+networks:
+    staging_eliza_network:
+        name: staging_eliza_network
+        driver: bridge
+
+volumes:
+    staging_eliza_data:
+        name: staging_eliza_data
+    redis_data:
+        name: redis_staging_eliza_data
+    node_modules:
+        name: eliza_staging_node_modules
