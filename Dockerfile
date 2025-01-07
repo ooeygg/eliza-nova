@@ -1,3 +1,4 @@
+### Dockerfile ###
 # Use a specific Node.js version for better reproducibility
 FROM node:23.3.0-slim AS builder
 
@@ -22,16 +23,19 @@ COPY agent ./agent
 COPY packages ./packages
 COPY scripts ./scripts
 COPY characters ./characters
+COPY client ./client
 
 # Install dependencies and build the project
 RUN pnpm install \
     && pnpm build-docker \
-    && pnpm prune --prod
+    && pnpm run build \
+    && cd client && pnpm install && pnpm build \
+    && cd .. && pnpm prune --prod
 
 # Create a new stage for the final image
 FROM node:23.3.0-slim
 
-# Install runtime dependencies if needed
+# Install runtime dependencies
 RUN npm install -g pnpm@9.4.0 && \
     apt-get update && \
     apt-get install -y git python3 && \
@@ -50,6 +54,10 @@ COPY --from=builder /app/agent ./agent
 COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/scripts ./scripts
 COPY --from=builder /app/characters ./characters
+COPY --from=builder /app/client ./client
+
+# Expose ports
+EXPOSE 3000 5173
 
 # Set the command to run the application
 CMD ["pnpm", "start"]
