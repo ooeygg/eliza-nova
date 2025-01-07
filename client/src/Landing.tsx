@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CursorEffect } from './components/CursorEffect';
 import { Footer } from './components/ui/footer';
+import { SolanaWalletLogin } from './components/ui/solanaWalletLogin';
 import Agents from "./Agents";
 
 const Landing = () => {
@@ -38,7 +39,8 @@ const Landing = () => {
           Watch me evolve
         </h2>
 
-        <div className="w-full max-w-2xl space-y-3 mb-2">
+        <div className="w-full max-w-2xl space-y-3 mb-6">
+          <SolanaWalletLogin />
           {Object.entries(addresses).map(([network, address]) => (
             <div
               key={network}
