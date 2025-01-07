@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+    app:
+        container_name: nova_app_green
+        labels:
+            - "color=green"
+        environment:
+            - COLOR=green
+            - BACKEND_PORT=3001
+            - FRONTEND_PORT=5174
+        networks:
+            - app-network

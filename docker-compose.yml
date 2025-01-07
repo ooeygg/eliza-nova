@@ -1,0 +1,78 @@
+version: "3.8"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: nova_app_${COLOR:-blue}
+        labels:
+            - "color=${COLOR:-blue}"
+        stdin_open: true
+        tty: true
+        volumes:
+            - /var/run/tappd.sock:/var/run/tappd.sock
+            - app-data:/app/packages/client-twitter/src/tweetcache
+            - app-data:/app/db.sqlite
+            - ./shared/.env:/app/.env
+        env_file:
+            - ./shared/.env
+        environment:
+            NODE_ENV: production
+            PORT: ${BACKEND_PORT:-3000}
+            HOST: 0.0.0.0
+            API_URL: https://${DOMAIN}/api
+            CACHE_STORE: database
+            REDIS_URL: ${REDIS_URL}
+            DISCORD_APPLICATION_ID: ${DISCORD_APPLICATION_ID}
+            DISCORD_API_TOKEN: ${DISCORD_API_TOKEN}
+            DISCORD_VOICE_CHANNEL_ID: ${DISCORD_VOICE_CHANNEL_ID}
+            OPENAI_API_KEY: ${OPENAI_API_KEY}
+            OPENAI_API_URL: ${OPENAI_API_URL}
+            SMALL_OPENAI_MODEL: ${SMALL_OPENAI_MODEL}
+            MEDIUM_OPENAI_MODEL: ${MEDIUM_OPENAI_MODEL}
+            LARGE_OPENAI_MODEL: ${LARGE_OPENAI_MODEL}
+            EMBEDDING_OPENAI_MODEL: ${EMBEDDING_OPENAI_MODEL}
+            IMAGE_OPENAI_MODEL: ${IMAGE_OPENAI_MODEL}
+            ELEVENLABS_MODEL_ID: ${ELEVENLABS_MODEL_ID}
+            ELEVENLABS_VOICE_ID: ${ELEVENLABS_VOICE_ID}
+            ELEVENLABS_VOICE_STABILITY: ${ELEVENLABS_VOICE_STABILITY}
+            ELEVENLABS_VOICE_SIMILARITY_BOOST: ${ELEVENLABS_VOICE_SIMILARITY_BOOST}
+            ELEVENLABS_VOICE_STYLE: ${ELEVENLABS_VOICE_STYLE}
+            ELEVENLABS_VOICE_USE_SPEAKER_BOOST: ${ELEVENLABS_VOICE_USE_SPEAKER_BOOST}
+            ELEVENLABS_OPTIMIZE_STREAMING_LATENCY: ${ELEVENLABS_OPTIMIZE_STREAMING_LATENCY}
+            ELEVENLABS_OUTPUT_FORMAT: ${ELEVENLABS_OUTPUT_FORMAT}
+            EXPRESS_MAX_PAYLOAD: ${EXPRESS_MAX_PAYLOAD}
+            IMAGE_GEN: ${IMAGE_GEN}
+            USE_OPENAI_EMBEDDING: ${USE_OPENAI_EMBEDDING}
+            TEE_MODE: ${TEE_MODE}
+            WALLET_SECRET_SALT: ${WALLET_SECRET_SALT}
+        ports:
+            - "${BACKEND_PORT:-3000}:3000"
+            - "${FRONTEND_PORT:-5173}:5173"
+        restart: always
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:3000/agents"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 40s
+        networks:
+            - app-network
+        deploy:
+            resources:
+                limits:
+                    cpus: "2"
+                    memory: 4G
+                reservations:
+                    cpus: "1"
+                    memory: 2G
+
+networks:
+    app-network:
+        driver: bridge
+        name: nova_network
+
+volumes:
+    app-data:
+        driver: local
