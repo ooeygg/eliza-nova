@@ -1,4 +1,3 @@
-### Dockerfile ###
 # Use a specific Node.js version for better reproducibility
 FROM node:23.3.0-slim AS builder
 

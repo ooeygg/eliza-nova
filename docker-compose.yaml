@@ -1,4 +1,3 @@
-### docker-compose.yml ###
 version: "3.8"
 
 services:
@@ -16,9 +15,35 @@ services:
         env_file:
             - ./shared/.env
         environment:
-            - NODE_ENV=production
-            - PORT=3000
-            - HOST=0.0.0.0
+            NODE_ENV: production
+            PORT: 3000
+            HOST: 0.0.0.0
+            API_URL: https://${DOMAIN}/api
+            CACHE_STORE: database
+            REDIS_URL: \${REDIS_URL}
+            DISCORD_APPLICATION_ID: \${DISCORD_APPLICATION_ID}
+            DISCORD_API_TOKEN: \${DISCORD_API_TOKEN}
+            DISCORD_VOICE_CHANNEL_ID: \${DISCORD_VOICE_CHANNEL_ID}
+            OPENAI_API_KEY: \${OPENAI_API_KEY}
+            OPENAI_API_URL: \${OPENAI_API_URL}
+            SMALL_OPENAI_MODEL: \${SMALL_OPENAI_MODEL}
+            MEDIUM_OPENAI_MODEL: \${MEDIUM_OPENAI_MODEL}
+            LARGE_OPENAI_MODEL: \${LARGE_OPENAI_MODEL}
+            EMBEDDING_OPENAI_MODEL: \${EMBEDDING_OPENAI_MODEL}
+            IMAGE_OPENAI_MODEL: \${IMAGE_OPENAI_MODEL}
+            ELEVENLABS_MODEL_ID: \${ELEVENLABS_MODEL_ID}
+            ELEVENLABS_VOICE_ID: \${ELEVENLABS_VOICE_ID}
+            ELEVENLABS_VOICE_STABILITY: \${ELEVENLABS_VOICE_STABILITY}
+            ELEVENLABS_VOICE_SIMILARITY_BOOST: \${ELEVENLABS_VOICE_SIMILARITY_BOOST}
+            ELEVENLABS_VOICE_STYLE: \${ELEVENLABS_VOICE_STYLE}
+            ELEVENLABS_VOICE_USE_SPEAKER_BOOST: \${ELEVENLABS_VOICE_USE_SPEAKER_BOOST}
+            ELEVENLABS_OPTIMIZE_STREAMING_LATENCY: \${ELEVENLABS_OPTIMIZE_STREAMING_LATENCY}
+            ELEVENLABS_OUTPUT_FORMAT: \${ELEVENLABS_OUTPUT_FORMAT}
+            EXPRESS_MAX_PAYLOAD: \${EXPRESS_MAX_PAYLOAD}
+            IMAGE_GEN: \${IMAGE_GEN}
+            USE_OPENAI_EMBEDDING: \${USE_OPENAI_EMBEDDING}
+            TEE_MODE: \${TEE_MODE}
+            WALLET_SECRET_SALT: \${WALLET_SECRET_SALT}
         ports:
             - "3000:3000"
             - "5173:5173"
@@ -29,7 +54,12 @@ services:
             timeout: 10s
             retries: 3
             start_period: 40s
-        command: sh -c "pnpm start & cd client && pnpm dev --host"
+        networks:
+            - app-network
+
+networks:
+    app-network:
+        driver: bridge
 
 volumes:
     app-data:
