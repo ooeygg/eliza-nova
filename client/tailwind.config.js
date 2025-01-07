@@ -53,5 +53,40 @@ export default {
             },
         },
     },
-    plugins: [],
+    plugins: [
+        function({ addUtilities }) {
+            addUtilities({
+                '.animate-gradient-x': {
+                    '@keyframes gradient-x': {
+                        '0%, 100%': {
+                            'background-size': '200% 200%',
+                            'background-position': 'left center'
+                        },
+                        '50%': {
+                            'background-size': '200% 200%',
+                            'background-position': 'right center'
+                        }
+                    },
+                    'animation': 'gradient-x 15s ease infinite'
+                }
+            }),
+            addUtilities({
+                '.text-shadow-neon': {
+                    'text-shadow': `
+                        0 0 20px rgba(var(--primary-rgb), 0.7),
+                        0 0 40px rgba(var(--primary-rgb), 0.5),
+                        0 0 60px rgba(var(--primary-rgb), 0.3)
+                    `
+                }
+            })
+        }
+    ],
+    theme: {
+        extend: {
+            ...theme.extend,
+            variables: {
+                '--primary-rgb': '147, 51, 234'
+            }
+        }
+    }
 };
