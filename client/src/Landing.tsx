@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { CursorEffect } from './components/CursorEffect';
 import { Footer } from './components/ui/footer';
 import { SolanaWalletLogin } from './components/ui/solanaWalletLogin';
-import Agents from "./Agents";
+import { DemoButton } from './components/ui/demoButton';
+// import Agents from "./Agents";
 
 const Landing = () => {
   const [addresses] = useState({
@@ -72,8 +73,9 @@ const Landing = () => {
           ))}
         </div>
 
-        <div className="w-full max-w-2xl mt-2">
-            <Agents />
+        <div className="w-full max-w-2xl mt-2 space-y-6">
+            <DemoButton />
+            {/* <Agents /> */}
         </div>
       </main>
 
