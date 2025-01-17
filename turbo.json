@@ -22,9 +22,6 @@
             "outputs": ["dist/**"],
             "dependsOn": ["@elizaos/plugin-node#build"]
         },
-        "eliza-docs#build": {
-            "outputs": ["build/**"]
-        },
         "dev": {
             "persistent": true,
             "cache": false
